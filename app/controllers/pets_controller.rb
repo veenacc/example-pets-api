@@ -2,7 +2,8 @@ class PetsController < ApplicationController
   
   def index
     p current_user
-    @pets = Pet.all
+    # @pets = Pet.where(id: current_user.id)
+    @pets= current_user.pets
     # render json:{mesg: "all products"}
     render template: "pets/index"
   end
@@ -20,8 +21,7 @@ class PetsController < ApplicationController
       @pet = Pet.new(name: params[:name], 
                   age: params[:age], 
                   breed: params[:breed],
-                  user_id: current_user.id)
-      
+                  user_id: current_user.id)   
         if @pet.save
           render template: "pets/show"
           # render json: {message: "#{current_user.id}"}
@@ -30,8 +30,13 @@ class PetsController < ApplicationController
           # render json: {error: "not saved"}
         end
     else
-      render json: {error: "log in"}
-   
+      render json: {error: "log in"}   
     end  
   end
+
+  def update
+  end
+  def destroy
+  end
+  
 end
