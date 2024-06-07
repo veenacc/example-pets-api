@@ -9,4 +9,7 @@ Rails.application.routes.draw do
   # root "posts#index"
 
   post "/users" => "users#create"
+  post "/sessions" => "sessions#create"
+
+  post "/pets" => "pets#create"
 end
