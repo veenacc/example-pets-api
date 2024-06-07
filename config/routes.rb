@@ -12,4 +12,5 @@ Rails.application.routes.draw do
   post "/sessions" => "sessions#create"
 
   post "/pets" => "pets#create"
+  get "/pets" => "pets#index"
 end
