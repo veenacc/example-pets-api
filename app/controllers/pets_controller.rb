@@ -15,18 +15,23 @@ class PetsController < ApplicationController
   
   
   def create
-    @pet = Pet.new(name: params[:name], 
-                age: params[:age], 
-                breed: params[:breed],
-                user_id: params[:user_id])
-    
-    if @pet.save
-      # render template: "products/show"
-      render json: {message: "#{current_user.id}"}
-    else
-      # render json: {error: @product.errors.full_messages}
-      render json: {error: "not saved"}
-    end
+    if current_user
 
+      @pet = Pet.new(name: params[:name], 
+                  age: params[:age], 
+                  breed: params[:breed],
+                  user_id: current_user.id)
+      
+        if @pet.save
+          render template: "pets/show"
+          # render json: {message: "#{current_user.id}"}
+        else
+          render json: {error: @product.errors.full_messages}
+          # render json: {error: "not saved"}
+        end
+    else
+      render json: {error: "log in"}
+   
+    end  
   end
 end
